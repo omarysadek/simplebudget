@@ -46,7 +46,7 @@ sudo docker-compose up -d;
 Build and push an image (api)
 
 ```
-$ sudo docker login
+$ sudo docker login -u omarsadek
 $ cd docker/api
 $ sudo docker build -t api .
 $ sudo docker tag api omarsadek/simplebudget_api

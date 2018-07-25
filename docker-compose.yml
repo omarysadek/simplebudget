@@ -1,15 +1,15 @@
 version: '3.6'
 services:
   composer:
-    build: ./docker/api
-    #image: omarsadek/simplebudget_api
+    #build: ./docker/api
+    image: omarsadek/simplebudget_api
     container_name: composer
     volumes:
       - ./codebase:/var/www/html
     command: composer install
   api:
-    build: ./docker/api
-    #image: omarsadek/simplebudget_api
+    #build: ./docker/api
+    image: omarsadek/simplebudget_api
     container_name: api
     ports:
       - '0008:80'
