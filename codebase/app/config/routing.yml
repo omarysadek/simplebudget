@@ -1,0 +1,3 @@
+simple_budget:
+    resource: "@SimpleBudgetBundle/Resources/config/routing.yml"
+    prefix:   /

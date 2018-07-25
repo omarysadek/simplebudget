@@ -1,0 +1,3 @@
+simple_budget_homepage:
+    path:     /
+    defaults: { _controller: SimpleBudgetBundle:Default:index }
