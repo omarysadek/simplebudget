@@ -3,6 +3,8 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
     - { resource: "@SimpleBudgetBundle/Resources/config/services.yml" }
+    - { resource: packages/lexik_jwt_authentication.yaml }
+    - { resource: packages/nelmio_api_doc.yaml }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -40,7 +42,7 @@ twig:
 # Doctrine Configuration
 doctrine:
     dbal:
-        driver: pdo_mysql
+        driver: %database_driver%
         host: '%database_host%'
         port: '%database_port%'
         dbname: '%database_name%'
@@ -68,5 +70,5 @@ swiftmailer:
     spool: { type: memory }
 
 sensio_framework_extra:
-   router:
+    router:
         annotations: false

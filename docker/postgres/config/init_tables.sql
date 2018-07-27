@@ -1,3 +1,1 @@
-CREATE TABLE "bills" (
-  "id" serial NOT NULL
-);
+-- CREATE TABLE "bills" ("id" serial NOT NULL);

@@ -4,3 +4,7 @@ parameters:
     #parameter_name: value
 
 services:
+    SimpleBudgetBundle\DataFixtures\:
+        resource: '../../src/SimpleBudgetBundle/DataFixtures'
+        arguments: ['@service_container']
+        tags: [doctrine.fixture.orm]
