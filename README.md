@@ -5,13 +5,19 @@
 - [*About*](#about)
 - [*QuickSheets*](#quicksheets)
 - [*Instruction*](#instruction)
+- [*Unit test*](#unit-test)
 - [*Parameters*](#parameters)
 - [*Dev-ops*](#dev-ops)
+- [*Todo List*](#todo-list)
 
 ## About
 
 Simple Budget.
-A simple way to handle budget for daily life purpose.
+
+A simple way to handle your budget for daily life purpose.
+
+It will split each month your income in different budget, starting by bills, then saving, then projects.... and what is left over, you can spent it whenever you wants without caring if you got enoupgh money to pay bills.
+
 Documentation coming soon...
 
 ## QuickSheets
@@ -61,6 +67,12 @@ php bin/console doctrine:schema:create -n
 php bin/console doctrine:fixtures:load -n
 ```
 
+## Unit test
+
+```
+./vendor/bin/simple-phpunit
+```
+
 ## Parameters
 
 #### Ports
@@ -88,9 +100,19 @@ php bin/console doctrine:fixtures:load -n
 Build and push an image (api)
 
 ```
-sudo docker login -u omarsadek
+sudo docker login
 cd docker/api
 sudo docker build -t api .
 sudo docker tag api omarsadek/simplebudget_api
 sudo docker push omarsadek/simplebudget_api
 ```
+
+## Todo List
+
+- Configure stof/doctrine-extensions-bundle
+- Configure friendsofsymfony/rest-bundle
+- Configure jms/serializer-bundle
+- Configure nelmio/api-doc-bundle
+- Configure willdurand/faker-bundle
+
+

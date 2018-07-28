@@ -3,8 +3,6 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
     - { resource: "@SimpleBudgetBundle/Resources/config/services.yml" }
-    - { resource: packages/lexik_jwt_authentication.yaml }
-    - { resource: packages/nelmio_api_doc.yaml }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -42,7 +40,7 @@ twig:
 # Doctrine Configuration
 doctrine:
     dbal:
-        driver: %database_driver%
+        driver: '%database_driver%'
         host: '%database_host%'
         port: '%database_port%'
         dbname: '%database_name%'
@@ -72,3 +70,9 @@ swiftmailer:
 sensio_framework_extra:
     router:
         annotations: false
+
+lexik_jwt_authentication:
+    secret_key:       '%kernel.project_dir%/app/config/jwt/private.pem'
+    public_key:       '%kernel.project_dir%/app/config/jwt/public.pem'
+    pass_phrase:      'simplebudgetpewpew'
+    token_ttl:        3600

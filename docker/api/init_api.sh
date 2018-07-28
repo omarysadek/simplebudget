@@ -1,8 +1,9 @@
 #!/bin/bash
 
 cp /tmp/parameters.yml /var/www/html/app/config
-cp /tmp/private.pem /var/www/html/app/config/jwt
-cp /tmp/public.pem /var/www/html/app/config/jwt
+mkdir -p /var/www/html/app/config/jwt
+cp /tmp/private.pem /var/www/html/app/config/jwt/private.pem
+cp /tmp/public.pem /var/www/html/app/config/jwt/public.pem
 
 composer install -d/var/www/html/
 

@@ -39,3 +39,27 @@ monolog:
 
 #swiftmailer:
 #    delivery_addresses: ['me@example.com']
+
+bazinga_faker: ~
+
+nelmio_api_doc:
+    areas:
+        path_patterns:
+            - ^/api(?!/doc$)
+        host_patterns:
+            - ^api\.
+    documentation:
+        host: http://127.0.0.1:1008/
+        schemes: [http]
+        info:
+            title: Simple Budget
+            description: Helping you to manage your budget
+            version: 1.0.0
+        securityDefinitions:
+            Bearer:
+                type: apiKey
+                description: 'Value: Bearer {jwt}'
+                name: Authorization
+                in: header
+        security:
+            - Bearer: []

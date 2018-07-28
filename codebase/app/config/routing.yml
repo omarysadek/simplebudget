@@ -1,16 +1,6 @@
 simple_budget:
     resource: "@SimpleBudgetBundle/Resources/config/routing.yml"
-    prefix:   /
-
-app.swagger_ui:
-    path: /api/doc
-    methods: GET
-    defaults: { _controller: nelmio_api_doc.controller.swagger_ui }
-
-app.swagger:
-    path: /api/doc.json
-    methods: GET
-    defaults: { _controller: nelmio_api_doc.controller.swagger }
+    prefix:   /api
 
 api_login_check:
     path: /api/login_check
