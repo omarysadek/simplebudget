@@ -9,3 +9,10 @@ Thumbs.db
 
 # vi
 *~
+
+#vagrant
+.vagrant
+.cache
+.gnupg
+.bash_history
+.sudo_as_admin_successful

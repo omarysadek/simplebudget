@@ -26,6 +26,7 @@ Documentation coming soon...
 
 ```
 sudo docker stop $(sudo docker ps -a -q) ;sudo docker rm $(sudo docker ps -a -q);
+docker stop $(docker ps -a -q) ;docker rm $(docker ps -a -q);
 sudo docker-compose build --no-cache;
 sudo docker-compose up;
 ```
@@ -79,11 +80,11 @@ php bin/console doctrine:fixtures:load -n
 
 | Application     | Port | Internal Port | URL                               |
 |-----------------|------|---------------|-----------------------------------|
-| api             | 1008 | 80            | http://127.0.0.1:1008/app_dev.php |
-| postgres        | 2008 | 5432          |                                   |
-| redis           | 3008 | 6379          |                                   |
-| adminer         | 4008 | 8080          | http://127.0.0.1:4008/            |
-| redis-commander | 5008 | 8081          | http://127.0.0.1:5008/            |
+| api             | 8100 | 80            | http://127.0.0.1:1008/app_dev.php |
+| postgres        | 8200 | 5432          |                                   |
+| redis           | 8300 | 6379          |                                   |
+| adminer         | 8400 | 8080          | http://127.0.0.1:4008/            |
+| redis-commander | 8500 | 8081          | http://127.0.0.1:5008/            |
 
 #### Database
 
@@ -97,7 +98,7 @@ php bin/console doctrine:fixtures:load -n
 
 ## Dev-ops
 
-Build and push an image (api)
+Build and push a Docker image (api)
 
 ```
 sudo docker login
@@ -107,7 +108,18 @@ sudo docker tag api omarsadek/simplebudget_api
 sudo docker push omarsadek/simplebudget_api
 ```
 
+Build and push a Vagrant image
+
+```
+vagrant package --output simplebudget.box
+```
+
+Then upload it here : https://app.vagrantup.com/
+
 ## Todo List
+
+- Adding relationship to entities
+- Testing entities
 
 - Configure stof/doctrine-extensions-bundle
 - Configure friendsofsymfony/rest-bundle
