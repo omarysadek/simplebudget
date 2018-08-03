@@ -9,7 +9,7 @@ abstract class Enum
     /**
      * @return array
      */
-    public static function getConstants() : array
+    public static function getConstants(): array
     {
         $calledClass = get_called_class();
 
@@ -24,7 +24,7 @@ abstract class Enum
     /**
      * @return array
      */
-    public static function getNamesValues() : array
+    public static function getNamesValues(): array
     {
         return self::getConstants();
     }
@@ -32,7 +32,7 @@ abstract class Enum
     /**
      * @return array
      */
-    public static function getNames() : array
+    public static function getNames(): array
     {
         return array_keys(self::getConstants());
     }
@@ -40,7 +40,7 @@ abstract class Enum
     /**
      * @return array
      */
-    public static function getValues() : array
+    public static function getValues(): array
     {
         return array_values(self::getConstants());
     }
@@ -50,10 +50,9 @@ abstract class Enum
      *
      * @return bool
      */
-    public static function isValidName(string $name) : bool
+    public static function isValidName(string $name): bool
     {
         if (empty($name)) {
-
             return false;
         }
 
@@ -66,10 +65,9 @@ abstract class Enum
      *
      * @return bool
      */
-    public static function isValidValue($value, $caseSensitive = false) : bool
+    public static function isValidValue($value, $caseSensitive = false): bool
     {
         if (is_null($value)) {
-
             return false;
         }
 

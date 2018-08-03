@@ -4,8 +4,8 @@ namespace SimpleBudgetBundle\Component\Core\Utility\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
 
-trait IdTrait {
-
+trait IdTrait
+{
     /**
      * @ORM\Id
      * @ORM\Column(name="id", type="integer")
@@ -14,9 +14,9 @@ trait IdTrait {
     private $id;
 
     /**
-     * @return integer
+     * @return int
      */
-    public function getId() : int
+    public function getId(): int
     {
         return $this->id;
     }

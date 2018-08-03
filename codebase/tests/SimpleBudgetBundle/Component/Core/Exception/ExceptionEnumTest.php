@@ -2,12 +2,22 @@
 
 namespace Tests\SimpleBudgetBundle\Component\Core\Exception;
 
-use PHPUnit\Framework\TestCase;
-
+use Tests\SimpleBudgetBundle\UtilityTestCase;
 use SimpleBudgetBundle\Component\Core\Exception\ExceptionEnum;
 
-class ExceptionEnumTest extends TestCase
+class ExceptionEnumTest extends UtilityTestCase
 {
+    /**
+     * @test
+     */
+    public function errorThrowInvalidArgumentException()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid exception code - #'.ExceptionEnum::INVALID_EXCEPTION_CODE);
+
+        ExceptionEnum::throwInvalidArgumentException('', 0);
+    }
+
     /**
      * @test
      * @dataProvider throwInvalidArgumentExceptionProvider
@@ -15,7 +25,7 @@ class ExceptionEnumTest extends TestCase
     public function throwInvalidArgumentException($message, $code, $exceptionName)
     {
         $this->expectException($exceptionName);
-        $this->expectExceptionMessage($message . ' - #' . $code);
+        $this->expectExceptionMessage($message.' - #'.$code);
 
         ExceptionEnum::throwInvalidArgumentException($message, $code);
     }
@@ -24,11 +34,10 @@ class ExceptionEnumTest extends TestCase
     {
         return [
             [
-                'message'   => 'error message',
-                'code'      => ExceptionEnum::INVALID_EXCEPTION_CODE,
-                'exceptionName' => \InvalidArgumentException::class
-            ]
+                'message' => 'error message',
+                'code' => ExceptionEnum::INVALID_EXCEPTION_CODE,
+                'exceptionName' => \InvalidArgumentException::class,
+            ],
         ];
     }
 }
-

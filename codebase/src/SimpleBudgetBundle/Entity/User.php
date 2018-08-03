@@ -3,8 +3,10 @@
 namespace SimpleBudgetBundle\Entity;
 
 use Symfony\Component\Security\Core\User\UserInterface;
-
 use Doctrine\ORM\Mapping as ORM;
+use SimpleBudgetBundle\Component\Core\Utility\Traits\CreatedAtTrait;
+use SimpleBudgetBundle\Component\Core\Utility\Traits\UpdatedAtTrait;
+use SimpleBudgetBundle\Component\Core\Utility\Traits\UpdatedByTrait;
 
 /**
  * @ORM\Entity
@@ -13,6 +15,10 @@ use Doctrine\ORM\Mapping as ORM;
 class User implements UserInterface, \Serializable
 {
     const ROLE_DEFAULT = 'ROLE_USER';
+
+    use CreatedAtTrait;
+    use UpdatedAtTrait;
+    use UpdatedByTrait;
 
     /**
      * @ORM\Id
@@ -62,7 +68,7 @@ class User implements UserInterface, \Serializable
     /**
      * @return string
      */
-    public function __toString() : string
+    public function __toString(): string
     {
         return (string) $this->getUsername();
     }
@@ -70,7 +76,7 @@ class User implements UserInterface, \Serializable
     /**
      * @return int
      */
-    public function setId(int $id) : User
+    public function setId(int $id): User
     {
         $this->id = $id;
 
@@ -80,7 +86,7 @@ class User implements UserInterface, \Serializable
     /**
      * @return int
      */
-    public function getId() : int
+    public function getId(): int
     {
         return $this->id;
     }
@@ -88,7 +94,7 @@ class User implements UserInterface, \Serializable
     /**
      * @return string
      */
-    public function getUsername() : string
+    public function getUsername(): string
     {
         return $this->username;
     }
@@ -98,7 +104,7 @@ class User implements UserInterface, \Serializable
      *
      * @return User
      */
-    public function setUsername(string $username) : User
+    public function setUsername(string $username): User
     {
         $this->username = $username;
 
@@ -108,7 +114,7 @@ class User implements UserInterface, \Serializable
     /**
      * @return string
      */
-    public function getPassword() : string
+    public function getPassword(): string
     {
         return $this->password;
     }
@@ -118,7 +124,7 @@ class User implements UserInterface, \Serializable
      *
      * @return User
      */
-    public function setPassword(string $password) : User
+    public function setPassword(string $password): User
     {
         $this->password = $password;
 
@@ -128,7 +134,7 @@ class User implements UserInterface, \Serializable
     /**
      * @return string
      */
-    public function getSalt() : string
+    public function getSalt(): string
     {
         return $this->salt;
     }
@@ -138,7 +144,7 @@ class User implements UserInterface, \Serializable
      *
      * @return User
      */
-    public function setSalt(string $salt) : User
+    public function setSalt(string $salt): User
     {
         $this->salt = $salt;
 
@@ -148,7 +154,7 @@ class User implements UserInterface, \Serializable
     /**
      * @return string
      */
-    public function getEmail() : string
+    public function getEmail(): string
     {
         return $this->email;
     }
@@ -158,7 +164,7 @@ class User implements UserInterface, \Serializable
      *
      * @return User
      */
-    public function setEmail(string $email) : User
+    public function setEmail(string $email): User
     {
         $this->email = $email;
 
@@ -168,7 +174,7 @@ class User implements UserInterface, \Serializable
     /**
      * @return bool
      */
-    public function isEnabled() : bool
+    public function isEnabled(): bool
     {
         return $this->enabled;
     }
@@ -178,7 +184,7 @@ class User implements UserInterface, \Serializable
      *
      * @return User
      */
-    public function setEnabled(bool $boolean) : User
+    public function setEnabled(bool $boolean): User
     {
         $this->enabled = (bool) $boolean;
 
@@ -188,7 +194,7 @@ class User implements UserInterface, \Serializable
     /**
      * @return array
      */
-    public function getRoles() : array
+    public function getRoles(): array
     {
         $roles = $this->roles;
         $roles[] = self::ROLE_DEFAULT;
@@ -201,7 +207,7 @@ class User implements UserInterface, \Serializable
      *
      * @return User
      */
-    public function setRoles(array $roles) : User
+    public function setRoles(array $roles): User
     {
         $this->roles = [];
 
@@ -217,10 +223,10 @@ class User implements UserInterface, \Serializable
      *
      * @return User
      */
-    public function addRole(string $role) : User
+    public function addRole(string $role): User
     {
         $role = strtoupper($role);
-        if ($role === self::ROLE_DEFAULT) {
+        if (self::ROLE_DEFAULT === $role) {
             return $this;
         }
 
@@ -236,7 +242,7 @@ class User implements UserInterface, \Serializable
      *
      * @return User
      */
-    public function removeRole(string $role) : User
+    public function removeRole(string $role): User
     {
         if (false !== $key = array_search(strtoupper($role), $this->roles, true)) {
             unset($this->roles[$key]);
@@ -251,7 +257,7 @@ class User implements UserInterface, \Serializable
      *
      * @return bool
      */
-    public function hasRole(string $role) : bool
+    public function hasRole(string $role): bool
     {
         return in_array(strtoupper($role), $this->getRoles(), true);
     }
@@ -273,7 +279,7 @@ class User implements UserInterface, \Serializable
             $this->salt,
             $this->email,
             $this->roles,
-            $this->enabled
+            $this->enabled,
         ]);
     }
 
@@ -284,7 +290,7 @@ class User implements UserInterface, \Serializable
      */
     public function unserialize($serialized)
     {
-        list (
+        list(
             $this->id,
             $this->username,
             $this->password,

@@ -16,3 +16,4 @@ Thumbs.db
 .gnupg
 .bash_history
 .sudo_as_admin_successful
+codebase/composer.lock

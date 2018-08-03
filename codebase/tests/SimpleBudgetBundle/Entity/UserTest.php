@@ -2,24 +2,23 @@
 
 namespace Tests\SimpleBudgetBundle\Entity;
 
-use PHPUnit\Framework\TestCase;
-
+use Tests\SimpleBudgetBundle\UtilityTestCase;
 use SimpleBudgetBundle\Entity\User;
 
-class UserTest extends TestCase
+class UserTest extends UtilityTestCase
 {
     /**
      * @test
      */
     public function unserialize()
     {
-        $id       = 1988;
+        $id = 1988;
         $username = 'username';
         $password = 'password';
-        $salt     = 'salt';
-        $email    = 'email';
-        $boolean  = true;
-        $roles    = User::ROLE_DEFAULT;
+        $salt = 'salt';
+        $email = 'email';
+        $boolean = true;
+        $roles = User::ROLE_DEFAULT;
 
         $john = new User();
 
@@ -33,7 +32,6 @@ class UserTest extends TestCase
 
         $jack = new User();
         $jack->unserialize($john->serialize());
-
 
         $this->assertEquals($john->getId(), $jack->getId());
         $this->assertEquals($username, $jack->getUsername());

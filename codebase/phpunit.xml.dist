@@ -6,11 +6,23 @@
          backupGlobals="false"
          colors="true"
          bootstrap="vendor/autoload.php"
+         stopOnFailure="false"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
 >
     <php>
         <ini name="error_reporting" value="-1" />
         <server name="KERNEL_CLASS" value="AppKernel" />
     </php>
+
+    <listeners>
+        <listener class="Symfony\Bridge\PhpUnit\CoverageListener" />
+    </listeners>
+
+    <logging>
+        <log type="coverage-html" target="web/coverage"/>
+    </logging>
 
     <testsuites>
         <testsuite name="Project Test Suite">
@@ -22,7 +34,9 @@
         <whitelist>
             <directory>src</directory>
             <exclude>
+                <directory>src/*Bundle/Controller</directory>
                 <directory>src/*Bundle/Resources</directory>
+                <directory>src/*Bundle/DataFixtures</directory>
                 <directory>src/*/*Bundle/Resources</directory>
                 <directory>src/*/Bundle/*Bundle/Resources</directory>
             </exclude>

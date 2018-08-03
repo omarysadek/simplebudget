@@ -1,5 +1,7 @@
 #!/bin/bash
 
+mkdir -p /var/www/html/web/coverage
+
 cp /tmp/parameters.yml /var/www/html/app/config
 mkdir -p /var/www/html/app/config/jwt
 cp /tmp/private.pem /var/www/html/app/config/jwt/private.pem

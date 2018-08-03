@@ -74,6 +74,18 @@ php bin/console doctrine:fixtures:load -n
 ./vendor/bin/simple-phpunit
 ```
 
+#### Fixing PSR-2 Issue
+
+```
+./vendor/bin/php-cs-fixer fix src --rules=@Symfony
+./vendor/bin/php-cs-fixer fix tests --rules=@Symfony
+```
+
+#### Code Coverage
+
+[http://127.0.0.1:8100/coverage/index.html](http://127.0.0.1:8100/coverage/index.html)
+
+
 ## Parameters
 
 #### Ports
@@ -118,9 +130,9 @@ Then upload it here : https://app.vagrantup.com/
 
 ## Todo List
 
-- Adding relationship to entities
-- Testing hole project
+- PHPUnit testing to > 90% (setup setters getters)
 
+- Sugested bundles
 - Configure stof/doctrine-extensions-bundle
 - Configure friendsofsymfony/rest-bundle
 - Configure jms/serializer-bundle

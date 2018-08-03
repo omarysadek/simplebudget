@@ -5,8 +5,10 @@ RUN apt-get install -y zip
 RUN apt-get install -y unzip
 RUN apt-get install -y libpq-dev
 RUN apt-get install -y zlib1g-dev
+RUN pecl install xdebug
 
 RUN docker-php-ext-install pdo pdo_pgsql zip
+RUN docker-php-ext-enable xdebug
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 

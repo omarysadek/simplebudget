@@ -3,7 +3,6 @@
 namespace SimpleBudgetBundle\DataFixtures;
 
 use SimpleBudgetBundle\Entity\User;
-
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -35,7 +34,7 @@ class UserFixtures extends Fixture
                     ->encodePassword($user, self::DEFAULT_PASSWORD)
             )
             ->setSalt(uniqid(mt_rand(), true))
-            ->setEmail(self::DEFAULT_USERNAME . '@gmail.com')
+            ->setEmail(self::DEFAULT_USERNAME.'@gmail.com')
             ->setEnabled(true)
             ->setRoles([$user::ROLE_DEFAULT]);
 

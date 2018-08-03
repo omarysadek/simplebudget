@@ -2,11 +2,10 @@
 
 namespace Tests\SimpleBudgetBundle\Component\Core\Utility\Enum;
 
-use Phpunit\Framework\TestCase;
-
+use Tests\SimpleBudgetBundle\UtilityTestCase;
 use SimpleBudgetBundle\Component\Core\Utility\Enum\Enum;
 
-class EnumTest extends TestCase
+class EnumTest extends UtilityTestCase
 {
     const VEGETA_KEY = 'VEGETA';
     const VEGETA_VALUE = 'weak';
@@ -17,9 +16,8 @@ class EnumTest extends TestCase
 
     public function setUp()
     {
-        $this->dragonballzEnum = new class extends Enum
-        {
-            const VEGETA  = EnumTest::VEGETA_VALUE;
+        $this->dragonballzEnum = new class() extends Enum {
+            const VEGETA = EnumTest::VEGETA_VALUE;
             const SUNGOKU = EnumTest::SUNGOKU_VALUE;
         };
     }
@@ -32,7 +30,7 @@ class EnumTest extends TestCase
         $this->assertEquals(
             [
                 self::VEGETA_KEY => $this->dragonballzEnum::VEGETA,
-                self::SUNGOKU_KEY => $this->dragonballzEnum::SUNGOKU
+                self::SUNGOKU_KEY => $this->dragonballzEnum::SUNGOKU,
             ],
             $this->dragonballzEnum->getConstants()
         );
@@ -46,7 +44,7 @@ class EnumTest extends TestCase
         $this->assertEquals(
             [
                 self::VEGETA_KEY => $this->dragonballzEnum::VEGETA,
-                self::SUNGOKU_KEY => $this->dragonballzEnum::SUNGOKU
+                self::SUNGOKU_KEY => $this->dragonballzEnum::SUNGOKU,
             ],
             $this->dragonballzEnum->getNamesValues()
         );
@@ -60,7 +58,7 @@ class EnumTest extends TestCase
         $this->assertEquals(
             [
                 self::VEGETA_KEY,
-                self::SUNGOKU_KEY
+                self::SUNGOKU_KEY,
             ],
             $this->dragonballzEnum->getNames()
         );
@@ -74,7 +72,7 @@ class EnumTest extends TestCase
         $this->assertEquals(
             [
                 $this->dragonballzEnum::VEGETA,
-                $this->dragonballzEnum::SUNGOKU
+                $this->dragonballzEnum::SUNGOKU,
             ],
             $this->dragonballzEnum->getValues()
         );
@@ -96,13 +94,17 @@ class EnumTest extends TestCase
     {
         return [
             [
-                'enumName'       => self::VEGETA_KEY,
-                'expectedResult' => true
+                'enumName' => self::VEGETA_KEY,
+                'expectedResult' => true,
             ],
             [
-                'enumName'       => 'Me',
-                'expectedResult' => false
-            ]
+                'enumName' => 'Me',
+                'expectedResult' => false,
+            ],
+            [
+                'enumName' => '',
+                'expectedResult' => false,
+            ],
         ];
     }
 
@@ -122,13 +124,17 @@ class EnumTest extends TestCase
     {
         return [
             [
-                'enumName'       => self::VEGETA_VALUE,
-                'expectedResult' => true
+                'enumName' => self::VEGETA_VALUE,
+                'expectedResult' => true,
             ],
             [
-                'enumName'       => 'meh',
-                'expectedResult' => false
-            ]
+                'enumName' => 'meh',
+                'expectedResult' => false,
+            ],
+            [
+                'enumName' => null,
+                'expectedResult' => false,
+            ],
         ];
     }
 }

@@ -3,7 +3,6 @@
 namespace SimpleBudgetBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
 use SimpleBudgetBundle\Component\Core\Utility\Traits\IdTrait;
 use SimpleBudgetBundle\Component\Core\Utility\Traits\NameTrait;
 use SimpleBudgetBundle\Component\Budget\Enum\CostByEnum;
@@ -19,7 +18,7 @@ class Budget
     use NameTrait;
 
     /**
-     * @ORM\Column(name="cost_amount", type="integer")
+     * @ORM\Column(name="cost_amount", type="float")
      */
     protected $costAmount;
 
@@ -36,11 +35,16 @@ class Budget
     protected $order;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Account", inversedBy="budgets")
+     */
+    protected $account;
+
+    /**
      * @param float $costAmount
      *
      * @return Budget
      */
-    public function setCostAmount(float $costAmount) : Budget
+    public function setCostAmount(float $costAmount): Budget
     {
         $this->costAmount = $costAmount;
 
@@ -50,7 +54,7 @@ class Budget
     /**
      * @return float
      */
-    public function getCostAmount() : float
+    public function getCostAmount(): float
     {
         return $this->costAmount;
     }
@@ -60,7 +64,7 @@ class Budget
      *
      * @return Budget
      */
-    public function setCostBy(string $costBy) : Budget
+    public function setCostBy(string $costBy): Budget
     {
         if (!CostByEnum::isValidValue($costBy)) {
             ExceptionEnum::throwBadRequestHttpException('Invalid budget cost_by enum', ExceptionEnum::INVALID_COST_BY_ENUM);
@@ -73,17 +77,17 @@ class Budget
     /**
      * @return string
      */
-    public function getCostBy() : string
+    public function getCostBy(): string
     {
         return $this->costBy;
     }
 
     /**
-     * @param integer $order
+     * @param int $order
      *
      * @return Budget
      */
-    public function setOrder(int $order) : Budget
+    public function setOrder(int $order): Budget
     {
         $this->order = $order;
 
@@ -91,10 +95,30 @@ class Budget
     }
 
     /**
-     * @return integer
+     * @return int
      */
-    public function getOrder() : int
+    public function getOrder(): int
     {
         return $this->order;
+    }
+
+    /**
+     * @param Account $account
+     *
+     * @return Budget
+     */
+    public function setAccount(Account $account): Budget
+    {
+        $this->account = $account;
+
+        return $this;
+    }
+
+    /**
+     * @return Account
+     */
+    public function getAccount(): Account
+    {
+        return $this->account;
     }
 }
