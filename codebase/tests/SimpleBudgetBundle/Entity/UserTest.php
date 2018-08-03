@@ -13,6 +13,7 @@ class UserTest extends TestCase
      */
     public function unserialize()
     {
+        $id       = 1988;
         $username = 'username';
         $password = 'password';
         $salt     = 'salt';
@@ -22,7 +23,8 @@ class UserTest extends TestCase
 
         $john = new User();
 
-        $john->setUsername($username)
+        $john->setId($id)
+            ->setUsername($username)
             ->setPassword($password)
             ->setSalt($salt)
             ->setEmail($email)

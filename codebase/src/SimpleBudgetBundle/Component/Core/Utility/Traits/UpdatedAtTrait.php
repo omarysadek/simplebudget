@@ -15,7 +15,7 @@ trait UpdatedAtTrait
     /**
      * @return \DateTime
      */
-    public function getUpdatedAt()
+    public function getUpdatedAt() : DateTime
     {
         return $this->updatedAt;
     }

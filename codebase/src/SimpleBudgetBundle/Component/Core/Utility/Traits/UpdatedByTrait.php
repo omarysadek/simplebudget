@@ -13,9 +13,9 @@ trait UpdatedByTrait
     protected $updatedBy;
 
     /**
-     * @return \DateTime
+     * @return User
      */
-    public function getUpdatedBy()
+    public function getUpdatedBy() : User
     {
         return $this->updatedBy;
     }

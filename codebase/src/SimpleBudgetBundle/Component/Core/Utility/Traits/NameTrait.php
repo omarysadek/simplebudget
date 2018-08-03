@@ -12,11 +12,11 @@ trait NameTrait
     protected $name;
 
     /**
-     * @param  string $name
+     * @param string $name
      *
      * @return mixed
      */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
 
@@ -26,7 +26,7 @@ trait NameTrait
     /**
      * @return string
      */
-    public function getName()
+    public function getName() : string
     {
         return $this->name;
     }

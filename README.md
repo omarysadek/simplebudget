@@ -119,7 +119,7 @@ Then upload it here : https://app.vagrantup.com/
 ## Todo List
 
 - Adding relationship to entities
-- Testing entities
+- Testing hole project
 
 - Configure stof/doctrine-extensions-bundle
 - Configure friendsofsymfony/rest-bundle

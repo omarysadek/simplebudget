@@ -36,7 +36,7 @@ class Account
      *
      * @return Account
      */
-    public function setEditable($bool)
+    public function setEditable(bool $bool) : Account
     {
         $this->editable = $bool;
 
@@ -46,17 +46,17 @@ class Account
     /**
      * @return bool
      */
-    public function isEditable()
+    public function isEditable() : bool
     {
         return $this->editable;
     }
 
     /**
-     * @param integer $total
+     * @param float $total
      *
      * @return Account
      */
-    public function setTotal($total)
+    public function setTotal(float $total) : Account
     {
         $this->total = $total;
 
@@ -64,9 +64,9 @@ class Account
     }
 
     /**
-     * @return integer
+     * @return float
      */
-    public function getTotal()
+    public function getTotal() : float
     {
         return $this->total;
     }
@@ -76,7 +76,7 @@ class Account
      *
      * @return Account
      */
-    public function setOrder($order)
+    public function setOrder(int $order) : Account
     {
         $this->order = $order;
 
@@ -86,7 +86,7 @@ class Account
     /**
      * @return integer
      */
-    public function getOrder()
+    public function getOrder() : int
     {
         return $this->order;
     }

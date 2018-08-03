@@ -24,11 +24,11 @@ class Transfer
     protected $date;
 
     /**
-     * @param date $date
+     * @param DateTime $date
      *
-     * @return date
+     * @return Transfer
      */
-    public function setDate($date)
+    public function setDate(DateTime $date) : Transfer
     {
         $this->date = $date;
 
@@ -36,9 +36,9 @@ class Transfer
     }
 
     /**
-     * @return date
+     * @return DateTime
      */
-    public function getDate()
+    public function getDate() : DateTime
     {
         return $this->date;
     }

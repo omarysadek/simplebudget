@@ -36,11 +36,11 @@ class Budget
     protected $order;
 
     /**
-     * @param integer $costAmount
+     * @param float $costAmount
      *
      * @return Budget
      */
-    public function setCostAmount($costAmount)
+    public function setCostAmount(float $costAmount) : Budget
     {
         $this->costAmount = $costAmount;
 
@@ -48,9 +48,9 @@ class Budget
     }
 
     /**
-     * @return integer
+     * @return float
      */
-    public function getCostAmount()
+    public function getCostAmount() : float
     {
         return $this->costAmount;
     }
@@ -60,7 +60,7 @@ class Budget
      *
      * @return Budget
      */
-    public function setCostBy($costBy)
+    public function setCostBy(string $costBy) : Budget
     {
         if (!CostByEnum::isValidValue($costBy)) {
             ExceptionEnum::throwBadRequestHttpException('Invalid budget cost_by enum', ExceptionEnum::INVALID_COST_BY_ENUM);
@@ -73,7 +73,7 @@ class Budget
     /**
      * @return string
      */
-    public function getCostBy()
+    public function getCostBy() : string
     {
         return $this->costBy;
     }
@@ -83,7 +83,7 @@ class Budget
      *
      * @return Budget
      */
-    public function setOrder($order)
+    public function setOrder(int $order) : Budget
     {
         $this->order = $order;
 
@@ -93,7 +93,7 @@ class Budget
     /**
      * @return integer
      */
-    public function getOrder()
+    public function getOrder() : int
     {
         return $this->order;
     }

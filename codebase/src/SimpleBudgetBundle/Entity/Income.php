@@ -38,11 +38,11 @@ class Income
     protected $type;
 
     /**
-     * @param integer $amount
+     * @param float $amount
      *
      * @return Income
      */
-    public function setAmount($amount)
+    public function setAmount(float $amount) : Income
     {
         $this->amount = $amount;
 
@@ -50,9 +50,9 @@ class Income
     }
 
     /**
-     * @return integer
+     * @return float
      */
-    public function getAmount()
+    public function getAmount() : float
     {
         return $this->amount;
     }
@@ -61,7 +61,7 @@ class Income
      *
      * @return Income
      */
-    public function setFrequency($frequency)
+    public function setFrequency(int $frequency) : Income
     {
         $this->frequency = $frequency;
 
@@ -71,7 +71,7 @@ class Income
     /**
      * @return integer
      */
-    public function getFrequency()
+    public function getFrequency() : int
     {
         return $this->frequency;
     }
@@ -80,7 +80,7 @@ class Income
      *
      *. @return Income
      */
-    public function setType($type)
+    public function setType(string $type) : Income
     {
         if (!TypeEnum::isValidValue($type)) {
             ExceptionEnum::throwBadRequestHttpException('Invalid income type enum', ExceptionEnum::INVALID_COST_BY_ENUM);
@@ -93,7 +93,7 @@ class Income
     /**
      * @return string
      */
-    public function getType()
+    public function getType() : string
     {
         return $this->type;
     }

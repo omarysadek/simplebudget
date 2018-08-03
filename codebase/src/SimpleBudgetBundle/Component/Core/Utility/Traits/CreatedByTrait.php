@@ -14,9 +14,9 @@ trait CreatedByTrait
     protected $createdBy;
 
     /**
-     * @return \DateTime
+     * @return User
      */
-    public function getCreatedBy()
+    public function getCreatedBy() : User
     {
         return $this->createdBy;
     }
