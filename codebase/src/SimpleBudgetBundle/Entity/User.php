@@ -4,9 +4,11 @@ namespace SimpleBudgetBundle\Entity;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 use SimpleBudgetBundle\Component\Core\Utility\Traits\CreatedAtTrait;
 use SimpleBudgetBundle\Component\Core\Utility\Traits\UpdatedAtTrait;
 use SimpleBudgetBundle\Component\Core\Utility\Traits\UpdatedByTrait;
+use SimpleBudgetBundle\Component\Core\Utility\Enum\RoleEnum;
 
 /**
  * @ORM\Entity
@@ -14,8 +16,6 @@ use SimpleBudgetBundle\Component\Core\Utility\Traits\UpdatedByTrait;
  */
 class User implements UserInterface, \Serializable
 {
-    const ROLE_DEFAULT = 'ROLE_USER';
-
     use CreatedAtTrait;
     use UpdatedAtTrait;
     use UpdatedByTrait;
@@ -48,7 +48,7 @@ class User implements UserInterface, \Serializable
     protected $email;
 
     /**
-     * @ORM\Column(name="enabled", type="boolean")
+     * @ORM\Column(name="is_enabled", type="boolean")
      */
     private $enabled;
 
@@ -62,7 +62,7 @@ class User implements UserInterface, \Serializable
     public function __construct()
     {
         $this->setEnabled(true);
-        $this->setRoles([]);
+        $this->roles = new ArrayCollection();
     }
 
     /**
@@ -192,28 +192,21 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * @return array
+     * @return ArrayCollection
      */
-    public function getRoles(): array
+    public function getRoles(): ArrayCollection
     {
-        $roles = $this->roles;
-        $roles[] = self::ROLE_DEFAULT;
-
-        return array_unique($roles);
+        return $this->roles;
     }
 
     /**
-     * @param array $roles
+     * @param ArrayCollection $roles
      *
      * @return User
      */
-    public function setRoles(array $roles): User
+    public function setRoles(ArrayCollection $roles): User
     {
-        $this->roles = [];
-
-        foreach ($roles as $role) {
-            $this->addRole($role);
-        }
+        $this->roles = $roles;
 
         return $this;
     }
@@ -226,13 +219,10 @@ class User implements UserInterface, \Serializable
     public function addRole(string $role): User
     {
         $role = strtoupper($role);
-        if (self::ROLE_DEFAULT === $role) {
+        if (RoleEnum::ROLE_USER === $role) {
             return $this;
         }
-
-        if (!in_array($role, $this->roles, true)) {
-            $this->roles[] = $role;
-        }
+        $this->roles->add($role);
 
         return $this;
     }
@@ -244,10 +234,8 @@ class User implements UserInterface, \Serializable
      */
     public function removeRole(string $role): User
     {
-        if (false !== $key = array_search(strtoupper($role), $this->roles, true)) {
-            unset($this->roles[$key]);
-            $this->roles = array_values($this->roles);
-        }
+        $role = strtoupper($role);
+        $this->roles->removeElement($role);
 
         return $this;
     }
@@ -259,7 +247,7 @@ class User implements UserInterface, \Serializable
      */
     public function hasRole(string $role): bool
     {
-        return in_array(strtoupper($role), $this->getRoles(), true);
+        return $this->roles->contains(strtoupper($role));
     }
 
     public function eraseCredentials()
@@ -278,7 +266,7 @@ class User implements UserInterface, \Serializable
             $this->password,
             $this->salt,
             $this->email,
-            $this->roles,
+            serialize($this->roles),
             $this->enabled,
         ]);
     }
@@ -299,6 +287,7 @@ class User implements UserInterface, \Serializable
             $this->roles,
             $this->enabled
         ) = unserialize($serialized, array('allowed_classes' => false));
+        $this->roles = unserialize($this->roles);
 
         return $this;
     }

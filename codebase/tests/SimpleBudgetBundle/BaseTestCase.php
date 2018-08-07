@@ -4,7 +4,7 @@ namespace Tests\SimpleBudgetBundle;
 
 use PHPUnit\Framework\TestCase;
 
-abstract class UtilityTestCase extends TestCase
+abstract class BaseTestCase extends TestCase
 {
     /**
      * @param string $className

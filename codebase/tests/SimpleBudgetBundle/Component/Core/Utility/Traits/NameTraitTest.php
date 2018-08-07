@@ -2,10 +2,10 @@
 
 namespace Tests\SimpleBudgetBundle\Component\Core\Utility\Traits;
 
-use Tests\SimpleBudgetBundle\UtilityTestCase;
+use Tests\SimpleBudgetBundle\BaseTestCase;
 use SimpleBudgetBundle\Component\Core\Utility\Traits\NameTrait;
 
-class NameTraitTest extends UtilityTestCase
+class NameTraitTest extends BaseTestCase
 {
     const NAME = 'MrMasterOfNone';
 

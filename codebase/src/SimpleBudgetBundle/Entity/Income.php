@@ -43,6 +43,19 @@ class Income
     protected $type;
 
     /**
+     * @ORM\OneToOne(targetEntity="Budget")
+     */
+    protected $budget;
+
+    /**
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return (string) $this->getName();
+    }
+
+    /**
      * @param float $amount
      *
      * @return Income
@@ -90,7 +103,7 @@ class Income
     public function setType(string $type): Income
     {
         if (!TypeEnum::isValidValue($type)) {
-            ExceptionEnum::throwBadRequestHttpException('Invalid income type enum', ExceptionEnum::INVALID_COST_BY_ENUM);
+            ExceptionEnum::throwInvalidArgumentException('Invalid income type enum', ExceptionEnum::INVALID_COST_BY_ENUM);
         }
         $this->type = $type;
 
@@ -103,5 +116,25 @@ class Income
     public function getType(): string
     {
         return $this->type;
+    }
+
+    /**
+     * @param Budget $budget
+     *
+     * @return Income
+     */
+    public function setBudget(Budget $budget): Income
+    {
+        $this->budget = $budget;
+
+        return $this;
+    }
+
+    /**
+     * @return Budget
+     */
+    public function getBudget(): Budget
+    {
+        return $this->budget;
     }
 }

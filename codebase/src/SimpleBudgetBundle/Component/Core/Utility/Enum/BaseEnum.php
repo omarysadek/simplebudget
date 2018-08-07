@@ -2,7 +2,7 @@
 
 namespace SimpleBudgetBundle\Component\Core\Utility\Enum;
 
-abstract class Enum
+abstract class BaseEnum
 {
     protected static $constantsArray = array();
 

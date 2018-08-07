@@ -130,10 +130,10 @@ Then upload it here : https://app.vagrantup.com/
 
 ## Todo List
 
-- PHPUnit testing to > 90% (setup setters getters)
+- Fixing Auth issue
 
 - Sugested bundles
-- Configure stof/doctrine-extensions-bundle
+- Configure stof/doctrine-extensions-bundle => Loggable
 - Configure friendsofsymfony/rest-bundle
 - Configure jms/serializer-bundle
 - Configure nelmio/api-doc-bundle

@@ -2,9 +2,9 @@
 
 namespace SimpleBudgetBundle\Component\Budget\Enum;
 
-use SimpleBudgetBundle\Component\Core\Utility\Enum\Enum;
+use SimpleBudgetBundle\Component\Core\Utility\Enum\BaseEnum;
 
-class CostByEnum extends Enum
+class CostByEnum extends BaseEnum
 {
     const PERCENTAGE = 'percentage';
     const AMOUT = 'amout';

@@ -2,10 +2,10 @@
 
 namespace Tests\SimpleBudgetBundle\Component\Core\Exception;
 
-use Tests\SimpleBudgetBundle\UtilityTestCase;
+use Tests\SimpleBudgetBundle\BaseTestCase;
 use SimpleBudgetBundle\Component\Core\Exception\ExceptionEnum;
 
-class ExceptionEnumTest extends UtilityTestCase
+class ExceptionEnumTest extends BaseTestCase
 {
     /**
      * @test

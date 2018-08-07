@@ -8,7 +8,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 trait CreatedAtTrait
 {
     /**
-     * @ORM\Column(name="created_at", type="datetime", nullable=false)
+     * @ORM\Column(name="created_at", type="datetime")
      * @Gedmo\Timestampable(on="create")
      */
     protected $createdAt;

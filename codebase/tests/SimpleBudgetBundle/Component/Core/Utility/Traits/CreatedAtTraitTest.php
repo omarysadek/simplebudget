@@ -2,10 +2,10 @@
 
 namespace Tests\SimpleBudgetBundle\Component\Core\Utility\Traits;
 
-use Tests\SimpleBudgetBundle\UtilityTestCase;
+use Tests\SimpleBudgetBundle\BaseTestCase;
 use SimpleBudgetBundle\Component\Core\Utility\Traits\CreatedAtTrait;
 
-class CreatedAtTraitTest extends UtilityTestCase
+class CreatedAtTraitTest extends BaseTestCase
 {
     const CREATED_AT = '08/01/2018';
 

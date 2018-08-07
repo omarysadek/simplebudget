@@ -2,11 +2,11 @@
 
 namespace Tests\SimpleBudgetBundle\Component\Core\Utility\Traits;
 
-use Tests\SimpleBudgetBundle\UtilityTestCase;
+use Tests\SimpleBudgetBundle\BaseTestCase;
 use SimpleBudgetBundle\Component\Core\Utility\Traits\CreatedByTrait;
 use SimpleBudgetBundle\Entity\User;
 
-class CreatedByTraitTest extends UtilityTestCase
+class CreatedByTraitTest extends BaseTestCase
 {
     const USER_ID = 148;
 

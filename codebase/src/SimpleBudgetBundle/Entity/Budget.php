@@ -3,6 +3,7 @@
 namespace SimpleBudgetBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 use SimpleBudgetBundle\Component\Core\Utility\Traits\IdTrait;
 use SimpleBudgetBundle\Component\Core\Utility\Traits\NameTrait;
 use SimpleBudgetBundle\Component\Budget\Enum\CostByEnum;
@@ -18,14 +19,16 @@ class Budget
     use NameTrait;
 
     /**
-     * @ORM\Column(name="cost_amount", type="float")
+     * @ORM\Column(name="cost_amount", type="float", nullable=true)
      */
     protected $costAmount;
 
     /**
+     * By percentage, amout.
+     *
      * @var SimpleBudgetBundle\Component\Core\Utility\Enum\Enum\CostByEnum
      *
-     * @ORM\Column(name="cost_by", type="string")
+     * @ORM\Column(name="cost_by", type="string", nullable=true)
      */
     protected $costBy;
 
@@ -38,6 +41,42 @@ class Budget
      * @ORM\ManyToOne(targetEntity="Account", inversedBy="budgets")
      */
     protected $account;
+
+    /**
+     * @ORM\Column(name="is_saving", type="boolean")
+     */
+    protected $saving;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Bank")
+     */
+    protected $bank;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Transfer", mappedBy="budgetFrom")
+     * @ORM\JoinColumn(name="out_trannsfers", referencedColumnName="id")
+     */
+    protected $outTrannsfers;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Transfer", mappedBy="budgetTo")
+     * @ORM\JoinColumn(name="in_trannsfers", referencedColumnName="id")
+     */
+    protected $inTrannsfers;
+
+    public function __construct()
+    {
+        $this->outTrannsfers = new ArrayCollection();
+        $this->inTrannsfers = new ArrayCollection();
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return (string) $this->getName();
+    }
 
     /**
      * @param float $costAmount
@@ -67,7 +106,7 @@ class Budget
     public function setCostBy(string $costBy): Budget
     {
         if (!CostByEnum::isValidValue($costBy)) {
-            ExceptionEnum::throwBadRequestHttpException('Invalid budget cost_by enum', ExceptionEnum::INVALID_COST_BY_ENUM);
+            ExceptionEnum::throwInvalidArgumentException('Invalid budget cost_by enum', ExceptionEnum::INVALID_COST_BY_ENUM);
         }
         $this->costBy = $costBy;
 
@@ -120,5 +159,135 @@ class Budget
     public function getAccount(): Account
     {
         return $this->account;
+    }
+
+    /**
+     * @param bool $saving
+     *
+     * @return Budget
+     */
+    public function setSaving(bool $saving): Budget
+    {
+        $this->saving = $saving;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSaving(): bool
+    {
+        return $this->saving;
+    }
+
+    /**
+     * @param Bank $bank
+     *
+     * @return Account
+     */
+    public function setBank(Bank $bank): Budget
+    {
+        $this->bank = $bank;
+
+        return $this;
+    }
+
+    /**
+     * @return Bank
+     */
+    public function getBank(): Bank
+    {
+        return $this->bank;
+    }
+
+    /**
+     * @param ArrayCollection $outTrannsfers
+     *
+     * @return Budget
+     */
+    public function setOutTrannsfers(ArrayCollection $outTrannsfers): Budget
+    {
+        $this->outTrannsfers = $outTrannsfers;
+
+        return $this;
+    }
+
+    /**
+     * @param Transfer $outTrannsfer
+     *
+     * @return Budget
+     */
+    public function addOutTrannsfer(Transfer $outTrannsfer): Budget
+    {
+        $outTrannsfer->setBudgetFrom($this);
+        $this->outTrannsfers->add($outTrannsfer);
+
+        return $this;
+    }
+
+    /**
+     * @param Transfer $outTrannsfer
+     *
+     * @return Budget
+     */
+    public function removeOutTrannsfer(Transfer $outTrannsfer): Budget
+    {
+        $this->outTrannsfers->removeElement($outTrannsfer);
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getOutTrannsfers(): ArrayCollection
+    {
+        return $this->outTrannsfers;
+    }
+
+    /**
+     * @param ArrayCollection $inTrannsfers
+     *
+     * @return Budget
+     */
+    public function setInTrannsfers(ArrayCollection $inTrannsfers): Budget
+    {
+        $this->inTrannsfers = $inTrannsfers;
+
+        return $this;
+    }
+
+    /**
+     * @param Transfer $inTrannsfer
+     *
+     * @return Budget
+     */
+    public function addInTrannsfer(Transfer $inTrannsfer): Budget
+    {
+        $inTrannsfer->setBudgetTo($this);
+        $this->inTrannsfers->add($inTrannsfer);
+
+        return $this;
+    }
+
+    /**
+     * @param Transfer $inTrannsfer
+     *
+     * @return Budget
+     */
+    public function removeInTrannsfer(Transfer $inTrannsfer): Budget
+    {
+        $this->inTrannsfers->removeElement($inTrannsfer);
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getInTrannsfers(): ArrayCollection
+    {
+        return $this->inTrannsfers;
     }
 }

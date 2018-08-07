@@ -20,4 +20,14 @@ trait IdTrait
     {
         return $this->id;
     }
+
+    /**
+     * @return mix
+     */
+    public function setId(int $id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
 }

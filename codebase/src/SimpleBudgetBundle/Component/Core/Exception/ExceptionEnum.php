@@ -2,9 +2,9 @@
 
 namespace SimpleBudgetBundle\Component\Core\Exception;
 
-use SimpleBudgetBundle\Component\Core\Utility\Enum\Enum;
+use SimpleBudgetBundle\Component\Core\Utility\Enum\BaseEnum;
 
-class ExceptionEnum extends Enum
+class ExceptionEnum extends BaseEnum
 {
     const INVALID_EXCEPTION_CODE = 100001;
     const INVALID_COST_BY_ENUM = 100002;

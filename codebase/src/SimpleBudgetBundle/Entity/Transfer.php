@@ -14,33 +14,48 @@ class Transfer
     use IdTrait;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(name="schedule_at", type="datetime")
      */
-    protected $at;
+    protected $scheduleAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Budget")
+     * @ORM\ManyToOne(targetEntity="Budget", inversedBy="outTrannsfers")
+     * @ORM\JoinColumn(name="budget_from", referencedColumnName="id")
      */
-    protected $from;
+    protected $budgetFrom;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Budget")
+     * @ORM\ManyToOne(targetEntity="Budget", inversedBy="inTrannsfer")
+     * @ORM\JoinColumn(name="budget_to", referencedColumnName="id")
      */
-    protected $to;
+    protected $budgetTo;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Client")
+     * @ORM\ManyToOne(targetEntity="Client", inversedBy="transfers")
      */
     protected $client;
 
     /**
-     * @param \DateTime $at
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $comment;
+
+    /**
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return (string) $this->getId();
+    }
+
+    /**
+     * @param \DateTime $scheduleAt
      *
      * @return Transfer
      */
-    public function setAt(\DateTime $at): Transfer
+    public function setScheduleAt(\DateTime $scheduleAt): Transfer
     {
-        $this->at = $at;
+        $this->scheduleAt = $scheduleAt;
 
         return $this;
     }
@@ -48,19 +63,19 @@ class Transfer
     /**
      * @return \DateTime
      */
-    public function getAt(): \DateTime
+    public function getScheduleAt(): \DateTime
     {
-        return $this->at;
+        return $this->scheduleAt;
     }
 
     /**
-     * @param Budget $from
+     * @param Budget $budgetFrom
      *
      * @return Transfer
      */
-    public function setFrom(Budget $from): Transfer
+    public function setBudgetFrom(Budget $budgetFrom): Transfer
     {
-        $this->from = $from;
+        $this->budgetFrom = $budgetFrom;
 
         return $this;
     }
@@ -68,19 +83,19 @@ class Transfer
     /**
      * @return Budget
      */
-    public function getFrom(): Budget
+    public function getBudgetFrom(): Budget
     {
-        return $this->from;
+        return $this->budgetFrom;
     }
 
     /**
-     * @param Budget $to
+     * @param Budget $budgetTo
      *
      * @return Transfer
      */
-    public function setTo(Budget $to): Transfer
+    public function setBudgetTo(Budget $budgetTo): Transfer
     {
-        $this->to = $to;
+        $this->budgetTo = $budgetTo;
 
         return $this;
     }
@@ -88,9 +103,9 @@ class Transfer
     /**
      * @return Budget
      */
-    public function getTo(): Budget
+    public function getBudgetTo(): Budget
     {
-        return $this->to;
+        return $this->budgetTo;
     }
 
     /**
@@ -111,5 +126,25 @@ class Transfer
     public function getClient(): Client
     {
         return $this->client;
+    }
+
+    /**
+     * @param string $comment
+     *
+     * @return Transfer
+     */
+    public function setComment(string $comment): Transfer
+    {
+        $this->comment = $comment;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getComment()
+    {
+        return $this->comment;
     }
 }

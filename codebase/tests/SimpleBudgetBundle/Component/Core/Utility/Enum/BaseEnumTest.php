@@ -2,10 +2,10 @@
 
 namespace Tests\SimpleBudgetBundle\Component\Core\Utility\Enum;
 
-use Tests\SimpleBudgetBundle\UtilityTestCase;
-use SimpleBudgetBundle\Component\Core\Utility\Enum\Enum;
+use Tests\SimpleBudgetBundle\BaseTestCase;
+use SimpleBudgetBundle\Component\Core\Utility\Enum\BaseEnum;
 
-class EnumTest extends UtilityTestCase
+class BaseEnumTest extends BaseTestCase
 {
     const VEGETA_KEY = 'VEGETA';
     const VEGETA_VALUE = 'weak';
@@ -16,9 +16,9 @@ class EnumTest extends UtilityTestCase
 
     public function setUp()
     {
-        $this->dragonballzEnum = new class() extends Enum {
-            const VEGETA = EnumTest::VEGETA_VALUE;
-            const SUNGOKU = EnumTest::SUNGOKU_VALUE;
+        $this->dragonballzEnum = new class() extends BaseEnum {
+            const VEGETA = BaseEnumTest::VEGETA_VALUE;
+            const SUNGOKU = BaseEnumTest::SUNGOKU_VALUE;
         };
     }
 

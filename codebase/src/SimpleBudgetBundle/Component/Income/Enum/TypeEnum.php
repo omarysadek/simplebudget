@@ -2,9 +2,9 @@
 
 namespace SimpleBudgetBundle\Component\Income\Enum;
 
-use SimpleBudgetBundle\Component\Core\Utility\Enum\Enum;
+use SimpleBudgetBundle\Component\Core\Utility\Enum\BaseEnum;
 
-class TypeEnum extends Enum
+class TypeEnum extends BaseEnum
 {
     const SALARY = 'salary';
 }

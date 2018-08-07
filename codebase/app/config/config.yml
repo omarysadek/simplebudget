@@ -76,3 +76,10 @@ lexik_jwt_authentication:
     public_key:       '%kernel.project_dir%/app/config/jwt/public.pem'
     pass_phrase:      'simplebudgetpewpew'
     token_ttl:        3600
+
+stof_doctrine_extensions:
+    default_locale: en_US
+    orm:
+        default:
+            blameable: true
+            timestampable: true

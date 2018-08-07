@@ -2,10 +2,10 @@
 
 namespace Tests\SimpleBudgetBundle\Component\Core\Utility\Traits;
 
-use Tests\SimpleBudgetBundle\UtilityTestCase;
+use Tests\SimpleBudgetBundle\BaseTestCase;
 use SimpleBudgetBundle\Component\Core\Utility\Traits\IdTrait;
 
-class IdTraitTest extends UtilityTestCase
+class IdTraitTest extends BaseTestCase
 {
     const ID = 159;
 
