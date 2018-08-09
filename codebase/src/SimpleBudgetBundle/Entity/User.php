@@ -4,11 +4,9 @@ namespace SimpleBudgetBundle\Entity;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
 use SimpleBudgetBundle\Component\Core\Utility\Traits\CreatedAtTrait;
 use SimpleBudgetBundle\Component\Core\Utility\Traits\UpdatedAtTrait;
 use SimpleBudgetBundle\Component\Core\Utility\Traits\UpdatedByTrait;
-use SimpleBudgetBundle\Component\Core\Utility\Enum\RoleEnum;
 
 /**
  * @ORM\Entity
@@ -38,11 +36,6 @@ class User implements UserInterface, \Serializable
     protected $password;
 
     /**
-     * @ORM\Column(name="salt", type="string", nullable=true)
-     */
-    protected $salt;
-
-    /**
      * @ORM\Column(type="string", length=254, unique=true)
      */
     protected $email;
@@ -57,12 +50,13 @@ class User implements UserInterface, \Serializable
      */
     protected $roles;
 
+    protected $salt;
     protected $plainPassword;
 
     public function __construct()
     {
         $this->setEnabled(true);
-        $this->roles = new ArrayCollection();
+        $this->roles = [];
     }
 
     /**
@@ -131,24 +125,9 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getSalt(): string
+    public function getSalt()
     {
-        return $this->salt;
-    }
-
-    /**
-     * @param string $salt
-     *
-     * @return User
-     */
-    public function setSalt(string $salt): User
-    {
-        $this->salt = $salt;
-
-        return $this;
+        return null;
     }
 
     /**
@@ -192,21 +171,25 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * @return ArrayCollection
+     * @return array
      */
-    public function getRoles(): ArrayCollection
+    public function getRoles(): array
     {
-        return $this->roles;
+        return array_unique($this->roles);
     }
 
     /**
-     * @param ArrayCollection $roles
+     * @param array $roles
      *
      * @return User
      */
-    public function setRoles(ArrayCollection $roles): User
+    public function setRoles(array $roles): User
     {
-        $this->roles = $roles;
+        $this->roles = [];
+
+        foreach ($roles as $role) {
+            $this->addRole($role);
+        }
 
         return $this;
     }
@@ -219,10 +202,9 @@ class User implements UserInterface, \Serializable
     public function addRole(string $role): User
     {
         $role = strtoupper($role);
-        if (RoleEnum::ROLE_USER === $role) {
-            return $this;
+        if (!in_array($role, $this->roles, true)) {
+            $this->roles[] = $role;
         }
-        $this->roles->add($role);
 
         return $this;
     }
@@ -232,10 +214,12 @@ class User implements UserInterface, \Serializable
      *
      * @return User
      */
-    public function removeRole(string $role): User
+    public function removeRole($role): User
     {
-        $role = strtoupper($role);
-        $this->roles->removeElement($role);
+        if (false !== $key = array_search(strtoupper($role), $this->roles, true)) {
+            unset($this->roles[$key]);
+            $this->roles = array_values($this->roles);
+        }
 
         return $this;
     }
@@ -247,7 +231,7 @@ class User implements UserInterface, \Serializable
      */
     public function hasRole(string $role): bool
     {
-        return $this->roles->contains(strtoupper($role));
+        return in_array(strtoupper($role), $this->getRoles(), true);
     }
 
     public function eraseCredentials()
@@ -264,7 +248,6 @@ class User implements UserInterface, \Serializable
             $this->id,
             $this->username,
             $this->password,
-            $this->salt,
             $this->email,
             serialize($this->roles),
             $this->enabled,
@@ -282,7 +265,6 @@ class User implements UserInterface, \Serializable
             $this->id,
             $this->username,
             $this->password,
-            $this->salt,
             $this->email,
             $this->roles,
             $this->enabled

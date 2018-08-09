@@ -58,6 +58,21 @@ abstract class EntityBaseTestCase extends BaseTestCase
      *
      * @return \ReflectionClass
      */
+    protected function arrayCollectionsTest($attrName, $value)
+    {
+        $reflectionClass = $this->setterTest($attrName, [$value]);
+        //$reflectionClass = $this->adderTest($attrName, [$value]);
+        $this->removeTest($attrName, $reflectionClass, $value);
+
+        $this->getterTest($attrName, [$value]);
+    }
+
+    /**
+     * @param string $attrName
+     * @param string $value
+     *
+     * @return \ReflectionClass
+     */
     protected function enumTest($attrName, $value)
     {
         $this->setAndGetErTest($attrName, $value);

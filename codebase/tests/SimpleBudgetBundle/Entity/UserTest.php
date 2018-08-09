@@ -2,7 +2,6 @@
 
 namespace Tests\SimpleBudgetBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use SimpleBudgetBundle\Entity\User;
 use SimpleBudgetBundle\Component\Core\Utility\Enum\RoleEnum;
 
@@ -43,7 +42,7 @@ class UserTest extends EntityBaseTestCase
      */
     public function salt()
     {
-        $this->setAndGetErTest('salt', 'salt');
+        $this->assertEquals(null, $this->model->getSalt());
     }
 
     /**
@@ -64,21 +63,11 @@ class UserTest extends EntityBaseTestCase
 
     /**
      * @test
+     * @group user_roles
      */
     public function roles()
     {
-        $this->collectionsTest('roles', RoleEnum::ROLE_ADMIN);
-    }
-
-    /**
-     * @test
-     */
-    public function addDefaultRole()
-    {
-        $roles = $this->model->addRole((RoleEnum::ROLE_USER))
-            ->getRoles();
-
-        $this->assertEquals(0, $roles->count());
+        $this->arrayCollectionsTest('roles', RoleEnum::ROLE_ADMIN);
     }
 
     /**
@@ -99,21 +88,17 @@ class UserTest extends EntityBaseTestCase
         $id = 1988;
         $username = 'username';
         $password = 'password';
-        $salt = 'salt';
         $email = 'email';
         $boolean = true;
-        $roles = new ArrayCollection();
-        $roles->add(RoleEnum::ROLE_ADMIN);
 
         $john = new User();
 
         $john->setId($id)
             ->setUsername($username)
             ->setPassword($password)
-            ->setSalt($salt)
             ->setEmail($email)
             ->setEnabled($boolean)
-            ->setRoles($roles);
+            ->addRole(RoleEnum::ROLE_ADMIN);
 
         $jack = new User();
         $jack->unserialize($john->serialize());
@@ -121,10 +106,9 @@ class UserTest extends EntityBaseTestCase
         $this->assertEquals($john->getId(), $jack->getId());
         $this->assertEquals($username, $jack->getUsername());
         $this->assertEquals($password, $jack->getPassword());
-        $this->assertEquals($salt, $jack->getSalt());
         $this->assertEquals($email, $jack->getEmail());
         $this->assertEquals($boolean, $jack->isEnabled());
-        $this->assertEquals($roles, $jack->getRoles());
+        $this->assertEquals($john->getRoles(), $jack->getRoles());
     }
 
     /**

@@ -30,6 +30,9 @@ class ExceptionEnumTest extends BaseTestCase
         ExceptionEnum::throwInvalidArgumentException($message, $code);
     }
 
+    /**
+     * @return array
+     */
     public function throwInvalidArgumentExceptionProvider()
     {
         return [

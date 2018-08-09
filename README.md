@@ -128,9 +128,13 @@ vagrant package --output simplebudget.box
 
 Then upload it here : https://app.vagrantup.com/
 
-## Todo List
+## Todo Lis
 
-- Fixing Auth issue
+- REST for bank
+- Param extractor
+- Generating API doc
+- Adding payload
+- Implementing fake data
 
 - Sugested bundles
 - Configure stof/doctrine-extensions-bundle => Loggable
