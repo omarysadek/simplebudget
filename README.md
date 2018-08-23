@@ -92,7 +92,7 @@ php bin/console doctrine:fixtures:load -n
 
 | Application     | Port | Internal Port | URL                               |
 |-----------------|------|---------------|-----------------------------------|
-| api             | 8100 | 80            | http://127.0.0.1:8100/app_dev.php |
+| api             | 8100 | 80            | http://127.0.0.1:8100/            |
 | postgres        | 8200 | 5432          |                                   |
 | redis           | 8300 | 6379          |                                   |
 | adminer         | 8400 | 8080          | http://127.0.0.1:8400/            |
@@ -130,15 +130,10 @@ Then upload it here : https://app.vagrantup.com/
 
 ## Todo Lis
 
-- Generating API doc
-
 - Implementing fake data
 - Param extractor
 - Adding payload
 - Configure stof/doctrine-extensions-bundle => Loggable
-- Configure friendsofsymfony/rest-bundle
 - Configure jms/serializer-bundle
-- Configure nelmio/api-doc-bundle
+- Configure nelmio/api-doc-bundle (groups, remove auto gen param from path, swagger with post man)
 - Configure willdurand/faker-bundle
-
-

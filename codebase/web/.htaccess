@@ -18,6 +18,15 @@ DirectoryIndex app.php
 </IfModule>
 
 <IfModule mod_rewrite.c>
+    Options +FollowSymlinks
+
+    RewriteEngine on
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} !=/favicon.ico
+    RewriteCond %{HTTP_HOST} ^localhost
+    RewriteRule ^ %{ENV:BASE}/app_dev.php [L,QSA]
+
     RewriteEngine On
 
     # Determine the RewriteBase automatically and set it as environment variable.

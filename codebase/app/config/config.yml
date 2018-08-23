@@ -97,3 +97,24 @@ fos_rest:
         enabled: true
         validate: true
         validation_errors_argument: violations
+
+#https://bfanger.nl/swagger-explained/#swaggerObject
+nelmio_api_doc:
+    areas:
+        path_patterns:
+            - ^/api(?!/doc$)(?!/doc.json$)
+    documentation:
+        host: localhost:8100
+        schemes: [http]
+        info:
+            title: Doc
+            version: 1.0.0
+        consumes: application/json
+        securityDefinitions:
+            Bearer:
+                type: apiKey
+                name: authorization
+                description: 'Value: Bearer {jwt}'
+                in: header
+        security:
+            - Bearer: []
