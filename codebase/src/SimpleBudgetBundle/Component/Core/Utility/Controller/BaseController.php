@@ -2,12 +2,13 @@
 
 namespace SimpleBudgetBundle\Component\Core\Utility\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Request\ParamFetcher;
+use FOS\RestBundle\Routing\ClassResourceInterface;
 use SimpleBudgetBundle\Component\Core\Exception\ExceptionEnum;
 
-class BaseController extends Controller
+class BaseController extends FOSRestController implements ClassResourceInterface
 {
 
     /**

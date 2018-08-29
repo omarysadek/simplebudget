@@ -86,12 +86,14 @@ stof_doctrine_extensions:
             timestampable: true
 
 fos_rest:
+    routing_loader:
+        default_format: json
+        include_format: false
     param_fetcher_listener: true
+    body_listener: true
+    format_listener:
+        enabled: false
     body_converter:
         enabled: true
         validate: true
-    format_listener:
-        enabled: false
-    routing_loader:
-      include_format: false
-      default_format: json
+        validation_errors_argument: violations

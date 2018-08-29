@@ -92,11 +92,11 @@ php bin/console doctrine:fixtures:load -n
 
 | Application     | Port | Internal Port | URL                               |
 |-----------------|------|---------------|-----------------------------------|
-| api             | 8100 | 80            | http://127.0.0.1:1008/app_dev.php |
+| api             | 8100 | 80            | http://127.0.0.1:8100/app_dev.php |
 | postgres        | 8200 | 5432          |                                   |
 | redis           | 8300 | 6379          |                                   |
-| adminer         | 8400 | 8080          | http://127.0.0.1:4008/            |
-| redis-commander | 8500 | 8081          | http://127.0.0.1:5008/            |
+| adminer         | 8400 | 8080          | http://127.0.0.1:8400/            |
+| redis-commander | 8500 | 8081          | http://127.0.0.1:8500/            |
 
 #### Database
 
@@ -130,13 +130,11 @@ Then upload it here : https://app.vagrantup.com/
 
 ## Todo Lis
 
-- REST for bank
-- Param extractor
 - Generating API doc
-- Adding payload
-- Implementing fake data
 
-- Sugested bundles
+- Implementing fake data
+- Param extractor
+- Adding payload
 - Configure stof/doctrine-extensions-bundle => Loggable
 - Configure friendsofsymfony/rest-bundle
 - Configure jms/serializer-bundle

@@ -9,7 +9,7 @@ trait NameTrait
 {
     /**
      * @ORM\Column(name="name", type="string")
-     * @Assert\NotBlank(groups={"Create"})
+     * @Assert\NotBlank()
      */
     protected $name;
 
