@@ -2,12 +2,14 @@
 
 namespace SimpleBudgetBundle\Component\Core\Utility\Traits;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 trait NameTrait
 {
     /**
      * @ORM\Column(name="name", type="string")
+     * @Assert\NotBlank(groups={"Create"})
      */
     protected $name;
 

@@ -16,6 +16,8 @@ class Bank
     use NameTrait;
 
     /**
+     * The total amount of available money
+     *
      * @ORM\Column(type="float", nullable=true)
      */
     protected $total;

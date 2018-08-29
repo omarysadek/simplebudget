@@ -1,3 +1,7 @@
 simple_budget_homepage:
     path:     /helloworld
     defaults: { _controller: SimpleBudgetBundle:Default:index }
+
+rest_banks:
+    type:     rest
+    resource: SimpleBudgetBundle\Controller\BankController

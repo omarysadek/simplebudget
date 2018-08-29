@@ -68,6 +68,7 @@ swiftmailer:
     spool: { type: memory }
 
 sensio_framework_extra:
+    request: { converters: true }
     router:
         annotations: false
 
@@ -83,3 +84,14 @@ stof_doctrine_extensions:
         default:
             blameable: true
             timestampable: true
+
+fos_rest:
+    param_fetcher_listener: true
+    body_converter:
+        enabled: true
+        validate: true
+    format_listener:
+        enabled: false
+    routing_loader:
+      include_format: false
+      default_format: json
