@@ -137,3 +137,4 @@ Then upload it here : https://app.vagrantup.com/
 - Configure jms/serializer-bundle
 - Configure nelmio/api-doc-bundle (groups, remove auto gen param from path, swagger with post man)
 - Configure willdurand/faker-bundle
+
