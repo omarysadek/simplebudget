@@ -12,7 +12,12 @@ use SimpleBudgetBundle\Entity\Bank;
 class BankController extends BaseController
 {
     /**
-     * @ParamConverter("bank", converter="fos_rest.request_body")
+     * @ParamConverter(
+     *      "bank",
+     *      class="SimpleBudgetBundle\Entity\Bank",
+     *      converter="fos_rest.request_body",
+     *      options={"deserializationContext"={"groups"={"creat"}}}
+     *  )
      *
      * @SWG\Post(
      *   @SWG\Parameter(
@@ -30,14 +35,13 @@ class BankController extends BaseController
      */
     public function postAction(Bank $bank, ConstraintViolationListInterface $violations)
     {
-        if (count($violations) > 0) {
-            die('violation');
-        }
+        $this->checkViolations($violations);
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($bank);
         $em->flush();
 
+        //redirect
         return $this->handleView($this->view($bank));
     }
 }

@@ -2,8 +2,10 @@
 
 namespace SimpleBudgetBundle\Component\Core\Utility\Controller;
 
-use FOS\RestBundle\Controller\FOSRestController;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpFoundation\Request;
+use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Request\ParamFetcher;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 use SimpleBudgetBundle\Component\Core\Exception\ExceptionEnum;
@@ -38,5 +40,17 @@ class BaseController extends FOSRestController implements ClassResourceInterface
         }
 
         return $params;
+    }
+
+    /**
+     * @param ConstraintViolationListInterface $violations
+     */
+    protected function checkViolations(ConstraintViolationListInterface $violations)
+    {
+        if (count($violations) > 0) {
+            foreach ($violations as $violation) {
+                throw new BadRequestHttpException($violation->getMessage());
+            }
+        }
     }
 }

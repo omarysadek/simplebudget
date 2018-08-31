@@ -2,6 +2,7 @@
 
 namespace SimpleBudgetBundle\Entity;
 
+use JMS\Serializer\Annotation as JMS;
 use Doctrine\ORM\Mapping as ORM;
 use SimpleBudgetBundle\Component\Core\Utility\Traits\IdTrait;
 use SimpleBudgetBundle\Component\Core\Utility\Traits\NameTrait;
@@ -19,6 +20,7 @@ class Bank
      * The total amount of available money.
      *
      * @ORM\Column(type="float", nullable=true)
+     * @JMS\Groups({"default"})
      */
     protected $total;
 

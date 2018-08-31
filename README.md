@@ -127,14 +127,9 @@ vagrant package --output simplebudget.box
 ```
 
 Then upload it here : https://app.vagrantup.com/
-
 ## Todo Lis
-- Rest (param rw)
-- Implementing fake data
-- Param extractor
-- Adding payload
+
+- Configure nelmio/api-doc-bundle (swagger with post man)
 - Configure stof/doctrine-extensions-bundle => Loggable
-- Configure jms/serializer-bundle
-- Configure nelmio/api-doc-bundle (groups, swagger with post man)
 - Configure willdurand/faker-bundle
 
