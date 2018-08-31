@@ -9,6 +9,7 @@ trait NameTrait
 {
     /**
      * @ORM\Column(name="name", type="string")
+     *
      * @Assert\NotBlank()
      */
     protected $name;

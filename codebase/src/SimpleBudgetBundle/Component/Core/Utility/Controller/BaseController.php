@@ -10,7 +10,6 @@ use SimpleBudgetBundle\Component\Core\Exception\ExceptionEnum;
 
 class BaseController extends FOSRestController implements ClassResourceInterface
 {
-
     /**
      * @var Request
      */
@@ -30,7 +29,7 @@ class BaseController extends FOSRestController implements ClassResourceInterface
             $params = json_decode($request->getContent(), true);
 
             if (json_last_error()) {
-                ExceptionEnum::throwLogicException('Invalid JSON: '. json_last_error_msg(), ExceptionEnum::INVALID_JSON);
+                ExceptionEnum::throwLogicException('Invalid JSON: '.json_last_error_msg(), ExceptionEnum::INVALID_JSON);
             }
 
             if (!$params) {

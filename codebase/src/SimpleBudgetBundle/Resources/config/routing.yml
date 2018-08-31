@@ -1,3 +1,4 @@
-rest_banks:
-    type:     rest
-    resource: SimpleBudgetBundle\Controller\BankController
+post_bank:
+    path: "/banks.{_format}"
+    methods: POST
+    defaults: { _controller: SimpleBudgetBundle:Bank:post, _format: json }

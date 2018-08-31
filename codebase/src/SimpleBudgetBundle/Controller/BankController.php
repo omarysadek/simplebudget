@@ -11,7 +11,7 @@ use SimpleBudgetBundle\Entity\Bank;
 
 class BankController extends BaseController
 {
-     /**
+    /**
      * @ParamConverter("bank", converter="fos_rest.request_body")
      *
      * @SWG\Post(
@@ -24,12 +24,6 @@ class BankController extends BaseController
      *              required={"name"},
      *              @SWG\Property(property="name", type="string"),
      *          )
-     *   ),
-     *   @SWG\Parameter(
-     *     name="bank",
-     *     in="path",
-     *     type="string",
-     *     default="-"
      *   ),
      *   @SWG\Response(response="200", description="", @Model(type=Bank::class))
      * )
@@ -46,13 +40,4 @@ class BankController extends BaseController
 
         return $this->handleView($this->view($bank));
     }
-
-    public function getBankAction(Bank $bank)
-    {}
-
-    public function putBankAction(Bank $bank)
-    {}
-
-    public function removeBankAction(Bank $bank)
-    {}
 }
